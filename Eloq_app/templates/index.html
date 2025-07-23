@@ -71,6 +71,17 @@
      <a href="#" onclick="openSignUp()" class="text-indigo-600 hover:underline font-medium">Sign up</a>
    </p>
  </div>
- <script src="{% static 'javas.js' %}"></script>
+ <script>
+    function openSignIn() {
+    document.getElementById("sign_up").style.display = "none";
+    document.getElementById("sign_in").style.display = "block";
+  }
+  
+  function openSignUp() {
+    document.getElementById("sign_up").style.display = "block";
+    document.getElementById("sign_in").style.display = "none";
+  }
+  
+ </script>
 </body>
 </html>
