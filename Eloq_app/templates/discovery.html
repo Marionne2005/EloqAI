@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Recommendations | EloqAI{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 py-12">
+
+  <!-- 🔹 Titre principal -->
+  <h2 class="text-3xl font-semibold text-gray-800 text-center mb-2">Share a Discovery</h2>
+  <p class="text-gray-500 text-center mb-8">Add something interesting you’ve found a podcast, video, or idea worth sharing.</p>
+
+  <!-- 📜 Liste des découvertes -->
+  {% if discoveries %}
+    <div class="space-y-6 mb-10">
+      {% for item in discoveries %}
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+          <h4 class="text-lg font-semibold text-gray-900 mb-2">{{ item.title }}</h4>
+          <p class="text-gray-700">{{ item.description }}</p>
+          <p class="text-sm text-gray-400 mt-2 italic">Added on {{ item.created_at|date:"d M Y" }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-gray-500 mb-6 text-center">No discoveries yet. Be the first to share!</p>
+  {% endif %}
+
+  <!-- 📝 Formulaire de soumission -->
+  <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+    <form method="post" class="space-y-6">
+        {% csrf_token %}
+        
+        <div>
+          <label for="id_title" class="block text-sm font-medium text-gray-700">Title</label>
+          <input type="text" name="title" id="id_title" class="mt-1 w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600">
+        </div>
+      
+        <div>
+          <label for="id_description" class="block text-sm font-medium text-gray-700">Description</label>
+          <textarea name="description" id="id_description" rows="4" class="mt-1 w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"></textarea>
+        </div>
+      
+        <button type="submit"
+                class="w-full py-3 bg-blue-900 text-white rounded-md hover:bg-blue-950 transition">
+          Share Discovery
+        </button>
+      </form>
+      
+  </div>
+
+</div>
+{% endblock %}

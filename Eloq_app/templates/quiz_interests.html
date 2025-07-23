@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Recommendations | EloqAI{% endblock %}
+
+{% block content %}
+  <!-- 🌟 Titre + intro -->
+  <div class="text-center mt-10 mb-6">
+    <h2 class="text-3xl font-bold text-gray-800">🎯 Let's personalize your journey</h2>
+    <p class="text-gray-600 mt-2">
+      Choose the topics and skills you're interested in. EloqAI will customize your experience!
+    </p>
+  </div>
+
+  <!-- ✅ Formulaire -->
+  <form method="post" class="max-w-4xl mx-auto">
+    {% csrf_token %}
+
+    <!-- ✅ Affichage des erreurs (optionnel mais utile pour debug) -->
+    {% if form.errors %}
+      <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
+        <strong>⚠️ Please fix the following errors:</strong>
+        <ul class="list-disc pl-5">
+          {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+              <li><strong>{{ field|capfirst }}:</strong> {{ error }}</li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <!-- ✅ Cartes des intérêts -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-8">
+      {% for interest in form.fields.interests.queryset %}
+        <label class="cursor-pointer">
+          <input type="checkbox"
+                 name="interests"
+                 value="{{ interest.id }}"
+                 {% if interest in form.instance.interests.all %}checked{% endif %}
+                 class="hidden peer">
+          <div class="w-full h-full text-center border rounded-xl p-3 text-gray-700 font-medium 
+                      bg-white peer-checked:bg-blue-600 peer-checked:text-white 
+                      hover:shadow-md transition-all duration-200">
+            {{ interest.name }}
+          </div>
+        </label>
+      {% endfor %}
+    </div>
+
+    <!-- 🚀 Bouton de soumission -->
+    <div class="text-center">
+      <button
+        type="submit"
+        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-semibold shadow"
+      >
+        Start Learning 🚀
+      </button>
+    </div>
+  </form>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Exercise | EloqAI{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-8" >
+    <h2 class="text-5xl font-semibold mb-6 text-center">🎤 Daily Speaking Exercises</h2>
+
+    <div class="grid gap-4 font-[EBGaramond] ">
+        {% for exercise in exercises %}
+        <a href="{% url 'exercise_detail' exercise.id %}" class="block p-5 bg-white shadow-md hover:shadow-lg rounded-xl border border-gray-200 transition duration-200 hover:bg-gray-50">
+            <div class="flex justify-between items-center">
+                <h3 class="text-xl font-bold text-gray-800">{{ exercise.title }}</h3>
+                <span class="text-sm px-2 py-1 bg-blue-100 text-blue-600 rounded-full">{{ exercise.level }}</span>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

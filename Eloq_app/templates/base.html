@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Base - EloqAI{% endblock %}</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=DynaPuff:wght@400..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Forum&family=Great+Vibes&family=Imperial+Script&family=Italiana&family=Open+Sans&family=Quicksand:wght@300..700&family=Tangerine:wght@400;700&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&family=Vidaloka&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            italiana: ['Italiana', 'sans-serif'],
+            EBGaramond: ['EB Garamond', 'serif'],
+            GreatVibes: ['Great Vibes', 'serif'],
+          },
+          colors: {
+            orangeSun: '#FF7B00',
+            brightOrange: '#FF9500',
+            golden: '#FFC300',
+            softGold: '#FFD000',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    input[type="checkbox"].peer:checked + div {
+     background-color: #2563eb; /* bg-blue-600 */
+     color: white;
+   }
+ </style>
+ 
+</head>
+
+<body class="bg-gradient-to-br from-brightOrange via-golden to-softGold text-gray-900 min-h-screen">
+  <div class="flex min-h-screen">
+
+    <!-- Navbar latérale gauche -->
+    <nav class="bg-gradient-to-b from-[#FFF2CC] to-[#FFE082] w-64 px-8 py-6 flex flex-col font-EBGaramond shadow-xl z-10">
+      
+      <!-- Logo -->
+      <div class="mb-10">
+        <h2 class="text-4xl font-bold text-orangeSun">EloqAI</h2>
+      </div>
+
+      <!-- Liens de navigation -->
+      <div class="flex flex-col gap-6 text-xl text-gray-800">
+        <a href="{% url 'home' %}" class="hover:text-orangeSun transition flex items-center gap-3">
+          <i class="fas fa-home"></i>
+          Dashboard
+        </a>
+        <a href="{% url 'goal' %}" class="hover:text-orangeSun transition flex items-center gap-3">
+          <i class="fas fa-bullseye"></i>
+          Goals
+        </a>
+        <a href="{% url 'interests_quiz' %}" class="hover:text-orangeSun transition flex items-center gap-3">
+          <i class="fas fa-question-circle"></i>
+          Quiz / Interests
+        </a>
+        <a href="{% url 'podcast_recommendation' %}" class="hover:text-orangeSun transition flex items-center gap-3">
+          <i class="fas fa-headphones-alt"></i>
+          Recommendations
+        </a>
+        <a href="{% url 'daily_exercise' %}" class="hover:text-orangeSun transition flex items-center gap-3">
+          <i class="fas fa-microphone"></i>
+          Daily Exercise
+        </a>
+        <a href="{% url 'logout' %}" class="hover:text-orangeSun transition flex items-center gap-3 mt-10">
+         <i class="fas fa-sign-out-alt"></i>
+         Logout
+       </a>
+      </div>
+    </nav>
+
+    <!-- Contenu principal -->
+    <main class="flex-1 p-10 bg-white/70 rounded-tl-3xl shadow-inner relative z-0 overflow-y-auto">
+      {% block content %}
+      <!-- Ton contenu dynamique apparaîtra ici -->
+      {% endblock %}
+    </main>
+
+  </div>
+</body>
+</html>

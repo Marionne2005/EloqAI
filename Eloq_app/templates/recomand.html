@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto py-10 px-6">
+  <h1 class="text-3xl font-bold text-center mb-10">🎯 Recommendations Based on Your Interests</h1>
+
+  <!-- Podcasts Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-4">🎧 Podcasts</h2>
+    <ul class="space-y-6">
+      {% for podcast in podcasts %}
+        <li class="border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md transition">
+          <h3 class="text-lg font-bold text-gray-800">{{ podcast.title_original }}</h3>
+          <p class="text-sm text-gray-600 mt-1">
+            {{ podcast.description_original|truncatechars:120|default:"No description." }}
+          </p>
+          <a href="{{ podcast.listennotes_url }}" target="_blank" class="inline-block mt-2 text-blue-600 hover:underline font-semibold">
+            ▶️ Listen now
+          </a>
+        </li>
+      {% empty %}
+        <li>No podcasts found for your interests.</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <hr class="my-10">
+
+  <!-- Videos Section -->
+  <section>
+    <h2 class="text-2xl font-semibold mb-4">📹 Videos</h2>
+    <ul class="space-y-6">
+      {% for video in videos %}
+        <li class="border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md transition">
+          <h3 class="text-lg font-bold text-gray-800">{{ video.title }}</h3>
+          {% if video.description %}
+            <p class="text-sm text-gray-600 mt-1">{{ video.description|truncatechars:120 }}</p>
+          {% endif %}
+          <a href="{{ video.url }}" target="_blank" class="inline-block mt-2 text-green-600 hover:underline font-semibold">
+            ▶️ Watch now
+          </a>
+        </li>
+      {% empty %}
+        <li>No videos found for your interests.</li>
+      {% endfor %}
+    </ul>
+  </section>
+</div>
+{% endblock %}
