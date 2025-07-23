@@ -152,6 +152,11 @@ SESSION_COOKIE_SAMESITE = 'Lax'
 CSRF_COOKIE_SAMESITE = 'Lax'
 
 
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/home/'
+LOGOUT_REDIRECT_URL = '/'
+
+
 
 print("🔐 SECRET_KEY loaded:", SECRET_KEY[:10])
 print("🐞 DEBUG:", DEBUG)
